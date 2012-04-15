@@ -1,0 +1,3 @@
+Simple application to simulate usage of a barcode scanner.
+
+Barcode scanners are quite simple. They appear to the system as a keyboard and every character it scans is sent as if it were a keypress. They can optionally be configured to send an EOF character to indicate it's done sending the barcode characters. This app does these things. You create a list of 'barcodes' and every time you press the hotkey Windows+Z, the next barcode on the list will be typed. This is useful if you want to test how an application responds to barcode scanner input.
