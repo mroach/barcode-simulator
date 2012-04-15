@@ -4,4 +4,4 @@ A hardware barcode scanner is a relatively simple device. It appears to your sys
 
 ## Screenshot
 
-![Screenshot](/mroach/barcode-simulator/docs/screenshot-1.0.4.0.png)
+![Screenshot](/mroach/barcode-simulator/raw/master/docs/screenshot-1.0.4.0.png)
