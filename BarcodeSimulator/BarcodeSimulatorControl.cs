@@ -44,12 +44,12 @@ namespace BarcodeSimulator
             tt.SetToolTip(hotkeyTextBox, "Activation key sequence. Press " + hotkeyTextBox.Text + " to send the next barcode.");
             tt.SetToolTip(endsWithComboBox, "Optionally ends each barcode sending with this key.");
             tt.SetToolTip(newStringTextBox, "Enter a series of characters you want to simulate. Press Enter to add it.");
-            tt.SetToolTip(itemsListBox, "List of barcodes to send. Sends in order round-robin style. Select one and press Delete to remove it.");
+            tt.SetToolTip(itemsListView, "List of barcodes to send. Sends in order round-robin style. Select one and press Delete to remove it.");
         }
 
         private void HotkeyPressed(object sender, HandledEventArgs e)
         {
-            if (itemsListBox.Items.Count == 0)
+            if (itemsListView.Items.Count == 0)
             {
                 MessageBox.Show("You have to add some strings to the list first.", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -60,11 +60,11 @@ namespace BarcodeSimulator
             if (endsWithComboBox.SelectedIndex > 0)
                 Enum.TryParse(endsWithComboBox.SelectedItem.ToString(), out endKey);
 
-            var s = Pop();
+            var s = GetNextCode();
 
             // do the delayed key sending in a separate thread so we don't hang the window
             ThreadStart starter = () => StartSending(s, (int) delayNumeric.Value, endKey);
-            var t = new Thread(starter);
+            var t = new Thread(starter) { Name = "Sending keys " + s };
             t.Start();
         }
 
@@ -92,17 +92,27 @@ namespace BarcodeSimulator
         /// If we're at the end of the list, go back to the beginning
         /// </summary>
         /// <returns></returns>
-        private string Pop()
+        private string GetNextCode()
         {
-            if (itemsListBox.SelectedIndex == -1)
-                itemsListBox.SelectedIndex = 0;
+            if (itemsListView.SelectedItems.Count == 0)
+            {
+                itemsListView.Items[0].Selected = true;
+                itemsListView.Select();
+            }
 
-            var s = itemsListBox.SelectedItem.ToString();
+            var currentIndex = itemsListView.SelectedItems[0].Index;
 
-            if (itemsListBox.SelectedIndex == itemsListBox.Items.Count - 1)
-                itemsListBox.SelectedIndex = 0;
+            var s = itemsListView.Items[currentIndex].Text;
+
+            if (currentIndex == itemsListView.Items.Count - 1)
+            {
+                itemsListView.Items[currentIndex].Selected = false;
+                itemsListView.Items[0].Selected = true;
+            }
             else
-                itemsListBox.SelectedIndex++;
+                itemsListView.Items[currentIndex + 1].Selected = true;
+
+            itemsListView.Select();
 
             return s;
         }
@@ -118,7 +128,12 @@ namespace BarcodeSimulator
             if (e.KeyCode != Keys.Enter)
                 return;
 
-            itemsListBox.Items.Add(newStringTextBox.Text);
+            var code = newStringTextBox.Text;
+
+            
+            itemsListView.Items.Add(new ListViewItem(new[] { code, Barcode.GetTypeName(code) }));
+            itemsListView.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            
             newStringTextBox.Clear();
         }
 
@@ -127,15 +142,33 @@ namespace BarcodeSimulator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void itemsListBox_KeyDown(object sender, KeyEventArgs e)
+        private void itemsListView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Delete)
                 return;
 
-            if (itemsListBox.SelectedIndex == -1)
+            if (itemsListView.SelectedItems.Count == 0)
                 return;
 
-            itemsListBox.Items.RemoveAt(itemsListBox.SelectedIndex);
+            itemsListView.Items.Remove(itemsListView.SelectedItems[0]);
+        }
+
+        private void newStringTextBox_TextChanged(object sender, EventArgs e)
+        {
+            var text = newStringTextBox.Text;
+
+            if (string.IsNullOrEmpty(text))
+            {
+                newCodeTypeLabel.Text = null;
+                return;
+            }
+
+            var type = Barcode.GetTypeName(text);
+
+            if (newCodeTypeLabel.Text == type)
+                return;
+
+            newCodeTypeLabel.Text = type;
         }
     }
 }

@@ -5,5 +5,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Michael Roach")]
 [assembly: AssemblyProduct("BarcodeSimulator")]
 [assembly: AssemblyCopyright("None")]
-[assembly: AssemblyVersion("1.0.4.0")]
+[assembly: AssemblyVersion("1.0.5.0")]
 

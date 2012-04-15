@@ -18,6 +18,8 @@ def buildnumber
 	bumper_version.to_s
 end
 
+task :default => ["bump:build", :build]
+
 assemblyinfo :assemblyinfo  do |asm|
   asm.version = buildnumber
   asm.company_name = COMPANY

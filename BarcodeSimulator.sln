@@ -3,16 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeSimulator", "BarcodeSimulator\BarcodeSimulator.csproj", "{CF8A1048-009D-4892-9BDC-94864C2A4D57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeSimulator.Tests", "BarcodeSimulator.Tests\BarcodeSimulator.Tests.csproj", "{7513FB40-6034-4002-B434-603E57CDCF44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Debug|Any CPU.Build.0 = Debug|x86
+		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Debug|x64.ActiveCfg = Debug|x64
 		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Debug|x86.ActiveCfg = Debug|x86
-		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Debug|x86.Build.0 = Debug|x86
+		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Release|Any CPU.ActiveCfg = Release|x86
+		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Release|Any CPU.Build.0 = Release|x86
+		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Release|x64.ActiveCfg = Release|x64
 		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Release|x86.ActiveCfg = Release|x86
-		{CF8A1048-009D-4892-9BDC-94864C2A4D57}.Release|x86.Build.0 = Release|x86
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Debug|x64.ActiveCfg = Debug|x64
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Debug|x64.Build.0 = Debug|x64
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Debug|x86.ActiveCfg = Debug|x86
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Debug|x86.Build.0 = Debug|x86
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Release|x64.ActiveCfg = Release|x64
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Release|x64.Build.0 = Release|x64
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Release|x86.ActiveCfg = Release|x86
+		{7513FB40-6034-4002-B434-603E57CDCF44}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
