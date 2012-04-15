@@ -1,0 +1,6 @@
+*.suo
+*.user
+_ReSharper*
+releases/
+BarcodeSimulator/bin
+BarcodeSimulator/obj
